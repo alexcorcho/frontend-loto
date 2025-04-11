@@ -1,85 +1,227 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
-</script>
+<!-- <template class=  "bg-black" w-100>
+ 
+ <div class="container-flui bg-black">
+ <div class="container-fluid bg-black d-flex align-items-center justify-content-center">
+    <div class="w-100" style="">
+      <div class="text-center mb-4">
+        <i class="bi bi-twitter text-primary fs-1"></i>
+        <h2 class="fw-bold mt-3">Iniciar sesión en<br>Suscripciones</h2>
+      </div>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+      <form @submit.prevent="handleSubmit">
+        <div class="mb-3">
+          <label for="email" class="form-label text-white">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control bg-dark border-secondary text-white"
+            placeholder="nombre@ejemplo.com"
+            v-model="email"
+            required
+          />
+        </div>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+        <div class="mb-1 d-flex justify-content-between align-items-center">
+          <label for="password" class="form-label text-white mb-0">Contraseña</label>
+          <a href="#" class="text-primary small">¿Olvidaste tu contraseña?</a>
+        </div>
+        <div class="mb-3">
+          <input
+            type="password"
+            id="password"
+            class="form-control bg-dark border-secondary text-white"
+            v-model="password"
+            required
+          />
+        </div>
 
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
+        <button type="submit" class="btn btn-primary w-100 mb-3 fw-bold">
+          Iniciar sesión
+        </button>
+      </form>
+
+      <div class="d-flex align-items-center mb-3">
+        <hr class="flex-grow-1 border-secondary" />
+        <span class="mx-2 text-muted">o</span>
+        <hr class="flex-grow-1 border-secondary" />
+      </div>
+
+      <p class="text-center text-muted">
+        ¿No tienes una cuenta?
+        <a href="#" class="text-primary text-decoration-none">Regístrate</a>
+      </p>
     </div>
-  </header>
-
-  <RouterView />
+  </div>
+</div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    handleSubmit() {
+      console.log("Iniciando sesión con:", this.email, this.password);
+    },
+  },
+};
+</script>
+
+<style>
+
+
+
+</style> -->
+
+<template>
+  <div class="login-container">
+    <div class="login-box">
+      <div class="logo">Loto</div>
+      <h2>Iniciar sesión en<br />Suscripciones</h2>
+
+      <form @submit.prevent="handleLogin">
+        <label>Email</label>
+        <input type="email" v-model="email" placeholder="nombre@ejemplo.com" required />
+
+        <label class="password-label">
+          Contraseña
+          <a href="#" class="forgot">¿Olvidaste tu contraseña?</a>
+        </label>
+        <input type="password" v-model="password" required />
+
+        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+      </form>
+
+      <div class="separator">
+        <span>o</span>
+      </div>
+
+      <div class="register">
+        ¿No tienes una cuenta? <a href="#">Regístrate</a>
+      </div>
+    </div>
+  </div>
+</template>
+
+
+
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+  methods: {
+    handleLogin() {
+      console.log('Iniciar sesión con:', this.email, this.password);
+    }
+  }
+};
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+
+.login-container {
+  background-color: #000;
+  color: white;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+}
+
+.login-box {
+  /* width: ; */
+  max-width: 400px;
+  padding: 2rem;
+  background-color: #000;
+  text-align: center;
 }
 
 .logo {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+label {
   display: block;
-  margin: 0 auto 2rem;
+  text-align: left;
+  margin-bottom: 0.3rem;
+  font-weight: bold;
 }
 
-nav {
+.password-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot {
+  font-size: 0.85rem;
+  color: #1da1f2;
+  text-decoration: none;
+}
+
+input {
   width: 100%;
-  font-size: 12px;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #111;
+  border: 1px solid #333;
+  color: white;
+  border-radius: 4px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+  color: #888;
+}
+
+.separator span {
+  flex: 1;
   text-align: center;
-  margin-top: 2rem;
+  position: relative;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.separator span::before,
+.separator span::after {
+  content: '';
+  height: 1px;
+  background-color: #333;
+  position: absolute;
+  top: 50%;
+  width: 45%;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.separator span::before {
+  left: 0;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.separator span::after {
+  right: 0;
 }
 
-nav a:first-of-type {
-  border: 0;
+.register {
+  margin-top: 1rem;
+  font-size: 0.9rem;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+.register a {
+  color: #1da1f2;
+  text-decoration: none;
 }
 </style>
